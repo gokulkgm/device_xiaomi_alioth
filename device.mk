@@ -272,6 +272,7 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PACKAGES += \
     AliothFrameworks \
     AliothSystemUI \
+    AOSPAAliothFrameworks \
     FrameworksResTarget \
     WifiResTarget
 
