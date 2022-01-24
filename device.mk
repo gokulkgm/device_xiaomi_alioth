@@ -31,6 +31,9 @@ PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
 
+# Interfaces
+$(call inherit-product, $(LOCAL_PATH)/interfaces.mk)
+
 # Adreno
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.gfx.driver.1=com.qualcomm.qti.gpudrivers.kona.api30
