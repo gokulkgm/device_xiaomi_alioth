@@ -15,10 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <!-- Whether the display cutout region of the main built-in display should be forced to
-         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
-     -->
-     <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
 
     <!-- The default refresh rate. Alioth manages this using the peak refresh rate setting, so set
          this value to 0 so it has no effect. -->
@@ -27,8 +23,35 @@
     <!-- The default peak refresh rate for a given device. -->
     <integer name="config_defaultPeakRefreshRate">120</integer>
 
-    <!-- default refresh rate in the zone defined by birghtness and ambient thresholds -->
+    <!-- default refresh rate in the zone defined by brightness and ambient thresholds -->
     <integer name="config_defaultRefreshRateInZone">120</integer>
+
+    <!-- Default refresh rate while the device has high brightness mode enabled for HDR. -->
+    <integer name="config_defaultRefreshRateInHbmHdr">60</integer>
+
+    <!-- Not allow to switch to higher refresh rate when display brightness setting is
+         equal or less than this value -->
+    <integer-array name="config_brightnessThresholdsOfPeakRefreshRate">
+        <item>7</item> <!-- 33% UI brightness -->
+        <item>11</item> <!-- 45% UI brightness -->
+    </integer-array>
+    <integer-array name="config_ambientThresholdsOfPeakRefreshRate">
+        <item>-1</item>
+        <item>30</item>
+    </integer-array>
+
+    <!-- Switch to fixed refresh rate when display brightness setting is
+         equal or more than this value -->
+    <integer-array name="config_highDisplayBrightnessThresholdsOfFixedRefreshRate">
+        <item>255</item> <!-- 100% UI brightness -->
+    </integer-array>
+
+    <integer-array name="config_highAmbientBrightnessThresholdsOfFixedRefreshRate">
+        <item>50000</item>
+    </integer-array>
+
+    <!-- default refresh rate in the high zone defined by birghtness and ambient thresholds -->
+    <integer name="config_fixedRefreshRateInHighZone">120</integer>
 
     <!-- The bounding path of the cutout region of the main built-in display.
          Must either be empty if there is no cutout region, or a string that is parsable by
@@ -70,6 +93,11 @@
         @left
     </string>
 
+    <!-- Whether the display cutout region of the main built-in display should be forced to
+         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
+     -->
+     <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
+
     <!-- Array of desired screen brightness in nits corresponding to the lux values
       in the config_autoBrightnessLevels array. As with config_screenBrightnessMinimumNits and
       config_screenBrightnessMaximumNits, the display brightness is defined as the measured
@@ -101,11 +129,12 @@
       <item>264.8221315</item>    <!--  1808 - 2981 -->
       <item>327.8974352</item>    <!--  2981 - 5000 -->
       <item>401.1676739</item>    <!--  5000 - 10000 -->
-      <item>600.0</item>          <!--  10000+ -->
+      <item>750.0</item>          <!--  10000 -20000 -->
+      <item>900.0</item>          <!--  20000+ -->
     </array>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">6</integer>
+    <integer name="config_screenBrightnessDim">14</integer>
 
     <!-- Screen brightness when dozing. -->
     <integer name="config_screenBrightnessDoze">34</integer>
@@ -137,26 +166,21 @@
 
     <!-- Default screen brightness setting
          Must be in the range specified by minimum and maximum. -->
-    <item name="config_screenBrightnessSettingDefaultFloat" format="float" type="dimen">0.29019607843</item>
+    <item name="config_screenBrightnessSettingDefaultFloat" format="float" type="dimen">0.17429718</item>
 
-    <!-- An array describing the screen's backlight values corresponding to the brightness
-         values in the config_screenBrightnessNits array.
-         This array should be equal in size to config_screenBrightnessBacklight. -->
-    <integer-array name="config_screenBrightnessBacklight">
-        <item>1</item>
-        <item>255</item>
-    </integer-array>
+    <!-- Nonlinear coefficients for maximum panel brightness of 500 nits -->
+    <string-array name="config_reduceBrightColorsCoefficientsNonlinear">
+        <!-- a-coefficient --> <item>-0.4553233597</item>
+        <!-- b-coefficient --> <item>-0.2380196976</item>
+        <!-- y-intercept --> <item>0.9801096801</item>
+    </string-array>
 
-    <!-- An array of floats describing the screen brightness in nits corresponding to the backlight
-         values in the config_screenBrightnessBacklight array.  On OLED displays these  values
-         should be measured with an all white image while the display is in the fully on state.
-         Note that this value should *not* reflect the maximum brightness value for any high
-         brightness modes but only the maximum brightness value obtainable in a sustainable manner.
-         This array should be equal in size to config_screenBrightnessBacklight -->
-    <array name="config_screenBrightnessNits">
-        <item>2.0</item>
-        <item>1300.0</item>
-    </array>
+    <!-- Linear coefficients for maximum panel brightness of 500 nits -->
+    <string-array name="config_reduceBrightColorsCoefficients">
+        <!-- a-coefficient --> <item>0.0</item>
+        <!-- b-coefficient --> <item>-0.96</item>
+        <!-- y-intercept --> <item>1.0</item>
+    </string-array>
 
     <!-- Indicates whether device has a power button fingerprint sensor. -->
     <bool name="config_is_powerbutton_fps">true</bool>
@@ -176,7 +200,6 @@
     <integer-array name="config_availableColorModes">
         <item>0</item> <!-- COLOR_MODE_NATURAL   -->
         <item>1</item> <!-- COLOR_MODE_BOOSTED   -->
-        <item>2</item> <!-- COLOR_MODE_SATURATED -->
         <item>3</item> <!-- COLOR_MODE_AUTOMATIC -->
     </integer-array>
 
@@ -199,12 +222,10 @@
     <integer-array name="config_displayCompositionColorModes">
         <item>0</item> <!-- COLOR_MODE_NATURAL   -->
         <item>1</item> <!-- COLOR_MODE_BOOSTED   -->
-        <item>2</item> <!-- COLOR_MODE_SATURATED -->
         <item>3</item> <!-- COLOR_MODE_AUTOMATIC -->
     </integer-array>
 
     <integer-array name="config_displayCompositionColorSpaces">
-        <item>0</item> <!-- COLOR_MODE_DEFAULT    -->
         <item>0</item> <!-- COLOR_MODE_DEFAULT    -->
         <item>0</item> <!-- COLOR_MODE_DEFAULT    -->
         <item>9</item> <!-- COLOR_MODE_DISPLAY_P3 -->

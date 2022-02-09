@@ -45,28 +45,6 @@ PRODUCT_PACKAGES += \
 # APEX
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
-# ART
-
-# Optimize everything for preopt
-PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
-# Don't preopt prebuilts
-DONT_DEXPREOPT_PREBUILTS := true
-
-# Package Manager
-PRODUCT_PROPERTY_OVERRIDES += \
-    pm.dexopt.boot=verify \
-    pm.dexopt.first-boot=quicken \
-    pm.dexopt.install=speed-profile \
-    pm.dexopt.bg-dexopt=everything \
-    pm.dexopt.ab-ota=quicken
-
-# Dex
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.boot-dex2oat-cpu-set=1,2,3,4,5,6,7 \
-    dalvik.vm.boot-dex2oat-threads=7 \
-    dalvik.vm.image-dex2oat-cpu-set=0,1,2,3,4,5,6,7 \
-    dalvik.vm.image-dex2oat-threads=8
-
 # Atrace
 PRODUCT_PACKAGES += \
     android.hardware.atrace@1.0-service
@@ -104,7 +82,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.usb.disable.sidetone=true
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_overlay_static.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_overlay_static.xml
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -196,10 +176,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.use_smooth_motion=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.set_idle_timer_ms=1500 \
+    ro.surface_flinger.set_touch_timer_ms=200 \
+    ro.surface_flinger.set_display_power_timer_ms=1000 \
+    ro.surface_flinger.use_content_detection_for_refresh_rate=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.defer_fps_frame_count=2
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/display/,$(TARGET_COPY_OUT_VENDOR)/etc)
+
+# Display configuration
+PRODUCT_COPY_FILES += \
+    device/xiaomi/alioth/configs/displayconfig/display_id_4630946736638489729.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630946736638489729.xml
 
 # DPM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -267,6 +257,11 @@ PRODUCT_PACKAGES += \
     init.qti.dcvs.sh \
     init.target.rc \
     ueventd.alioth.rc
+
+# Keyboard bottom padding in dp for portrait mode
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.com.google.ime.height_ratio=1.0 \
+    ro.com.google.ime.kb_pad_port_b=14.4
 
 # Keymaster
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -347,9 +342,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepcounter.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
-
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service \
@@ -362,6 +354,10 @@ PRODUCT_SHIPPING_API_LEVEL := 30
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.soc.manufacturer=QTI \
     ro.soc.model=SM8250
+
+# Subsystem silent restart
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.ssr.restart_level=ALL_ENABLE
 
 # Telephony
 PRODUCT_COPY_FILES += \
