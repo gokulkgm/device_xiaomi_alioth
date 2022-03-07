@@ -42,31 +42,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
-# APEX
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
-
-# ART
-
-# Optimize everything for preopt
-PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
-# Don't preopt prebuilts
-DONT_DEXPREOPT_PREBUILTS := true
-
-# Package Manager
-PRODUCT_PROPERTY_OVERRIDES += \
-    pm.dexopt.boot=verify \
-    pm.dexopt.first-boot=quicken \
-    pm.dexopt.install=speed-profile \
-    pm.dexopt.bg-dexopt=everything \
-    pm.dexopt.ab-ota=quicken
-
-# Dex
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.boot-dex2oat-cpu-set=1,2,3,4,5,6,7 \
-    dalvik.vm.boot-dex2oat-threads=7 \
-    dalvik.vm.image-dex2oat-cpu-set=0,1,2,3,4,5,6,7 \
-    dalvik.vm.image-dex2oat-threads=8
-
 # Atrace
 PRODUCT_PACKAGES += \
     android.hardware.atrace@1.0-service
@@ -130,6 +105,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.qcom.bluetooth.twsp_state.enabled=false \
     ro.vendor.bluetooth.wipower=false \
     vendor.qcom.bluetooth.soc=hastings
+
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    persist.vendor.btstack.enable.lpa=true \
+    persist.vendor.btstack.enable.twsplus=true \
+    persist.vendor.bt.a2dp.aac_whitelist=false
 
 # Boot
 PRODUCT_PACKAGES += \
