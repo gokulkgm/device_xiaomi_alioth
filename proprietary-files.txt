@@ -86,14 +86,12 @@ vendor/lib/rfsa/adsp/misound_res_spk.bin|be3e9c6dd2632ad529dd4f4e9a5df5d955ff11c
 vendor/etc/audio_configs.xml|eb74ffb11b3b5190bb8070f84de0798ed53ebc87
 vendor/etc/audio_configs_stock.xml|0bd072df25ff1641701bf9fa066bdfefd3b52565
 vendor/etc/audio_effects.conf|49e00ca08a1cc3688d2f88bbf67fae5a5ebeabb4
-vendor/etc/audio_effects.xml|1c693ab0f2b0838c434ea6e36d304c7b1f15c28d
 vendor/etc/audio_io_policy.conf|2b38e2a34de25c2da90cba29851da3b33b42327a
 vendor/etc/audio_platform_info_intcodec.xml|e92ca8f1da14867d9e8711067713a0fd4559f111
 vendor/etc/audio_policy_volumes.xml|b6c0faeb54ac8f02c7b2f0cf6e3e4740d21e5386
 vendor/etc/cirrus.cfg|a2d9bf923d3d736a58baaacf23e3b406a9fd854b
 vendor/etc/mixer_paths.xml|42e0cb32b31579fc438211ee39e323ca0b32af35
 vendor/etc/mixer_paths_overlay_dynamic.xml|893f2ccd59194fc6e57ed47ad26e74b1ddf2d574
-vendor/etc/mixer_paths_overlay_static.xml|f843c1c0ebfd941c507d9fdd68c7c776a37cf443
 vendor/etc/sound_trigger_mixer_paths.xml|c674e5b33fc4c444c31da43344a88c82dd590e15
 vendor/etc/sound_trigger_platform_info.xml|759023d5690a3e1bc58bd929ef1db017074be437
 
@@ -345,7 +343,11 @@ vendor/lib64/camera/com.qti.sensormodule.alioth_sunny_imx355_ultra.bin|4ed25c678
 vendor/lib64/camera/com.qti.sensormodule.alioth_sunny_imx582_wide.bin|176327dd1f58d2d1304da01c7c259d5cfb4299ed
 vendor/lib64/camera/com.qti.sensormodule.alioth_sunny_s5k3t2_front.bin|6aa284b4332dbb7ec513be409246130874f90fcf
 vendor/lib64/camera/com.qti.sensormodule.alioth_sunny_s5k5e9yx04_macro.bin|bab0555925875515abe26b14005e01188a4712df
+vendor/lib64/camera/com.qti.tuned.alioth_ofilm_hi556_macro.bin|3f2c46c8c1f03f870ca9fb61e70b1003cc5aa51e
 vendor/lib64/camera/com.qti.tuned.alioth_ofilm_imx355_ultra.bin|03f055e482516dc7116424fb12f6d417fddde545
+vendor/lib64/camera/com.qti.tuned.alioth_ofilm_imx582_wide.bin|ee4f11ed228f6b90c1a4ffa82b76df24a37196a4
+vendor/lib64/camera/com.qti.tuned.alioth_ofilm_s5k3t2_front.bin|59e2673d78514a9972a589d4be2e0f08fbf5ec12
+vendor/lib64/camera/com.qti.tuned.alioth_sunny_imx355_ultra.bin|ac11d665bbab07759c1014b933299717ebdb818b
 vendor/lib64/camera/com.qti.tuned.alioth_sunny_imx582_wide.bin|ecdc09e6202252f6ff9dae4a8507999692eb4301
 vendor/lib64/camera/com.qti.tuned.alioth_sunny_s5k3t2_front.bin|59e2673d78514a9972a589d4be2e0f08fbf5ec12
 vendor/lib64/camera/com.qti.tuned.alioth_sunny_s5k5e9yx04_macro.bin|1dc18f74a7e69348ac5d6573b09669c63524b327
@@ -1221,7 +1223,6 @@ vendor/etc/sensors/config/sx932x_0.json|f4597bfa2ea8757a348018e93767cd387480b2e5
 vendor/etc/sensors/config/sx932x_1.json|bff36d0de29c6af4ce880be82e455856260e6fef
 vendor/etc/sensors/config/tcs3701.json|9b921156bfa4d26c866b09934798b7e0f6bd4bb8
 vendor/etc/sensors/judge_calibrated.json|a1b0daeddae3a94763400f0067682a36bba6ee8b
-vendor/etc/sensors/sensor_diag.cfg|a90a807b6e1a0ff524e13b0cc0e05a1a2845d48d
 vendor/etc/sensors/sns_reg_config|cea8c9f674c039de77bb7f743d8a9122ab8b6897
 
 # SecureMSM (GPQESE)

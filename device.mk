@@ -79,7 +79,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.usb.disable.sidetone=true
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_overlay_static.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_overlay_static.xml
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -248,6 +250,11 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.alioth.rc
 
+# Keyboard bottom padding in dp for portrait mode
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.com.google.ime.height_ratio=1.0 \
+    ro.com.google.ime.kb_pad_port_b=14.4
+
 # Keymaster
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.allow_encrypt_override=true \
@@ -342,6 +349,11 @@ PRODUCT_SHIPPING_API_LEVEL := 30
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.soc.manufacturer=QTI \
     ro.soc.model=SM8250
+
+# Subsystem silent restart
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.ssr.restart_level=ALL_ENABLE
+
 
 # Telephony
 PRODUCT_COPY_FILES += \
